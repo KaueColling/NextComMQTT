@@ -1,19 +1,22 @@
-import clientService from "@/hooks/clientService"
-import { Packet } from "mqtt/*"
+import clientService from "@/hooks/clientService";
 
-export default function Dashboard() {
-    clientService.addListenerCallback("teste", "Rodex", (topic: string, payload: any, packet: Packet) => {
-        let messageJSON: string = payload.toString()
-        let message = JSON.parse(messageJSON)
-        console.log(message)
-    })
-
+export default function dashboard() {
+    function renderMessages() {
+        return clientService.getMessages().map((message, index) => {
+            return (
+                <>
+                    <p key={index}>{message}</p>
+                </>
+            );
+        });
+    }
 
     return (
         <>
-        <div>
-            <h1>Dashboard</h1>     
-        </div>
+            <div>
+                <h1>Dashboard</h1>
+                {renderMessages()}
+            </div>
         </>
-    )
+    );
 }
