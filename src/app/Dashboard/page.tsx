@@ -1,29 +1,30 @@
-import clientService from "@/hooks/clientService";
+"use client";
 import axios from "axios";
+import { useEffect, useState } from "react";
 
-export default function dashboard() {
+type messageObject = {
+    Texto: string;
+};
+export default function Dashboard() {
     const api = axios.create({
-        baseURL: "http://localhost:3001",
+        baseURL: "https://api-para-mqtt.vercel.app",
     });
+    const [messages, setMessages] = useState([]);
 
-    api.get("/messages").then((response) => {
-        console.log(response);
-    });
-    function renderMessages() {
-        return clientService.getMessages().map((message, index) => {
-            return (
-                <>
-                    <p key={index}>{message}</p>
-                </>
-            );
+    useEffect(() => {
+        api.get("/messages").then((response: any) => {
+            console.log(response);
+            setMessages(response.data);
         });
-    }
+    }, []);
 
     return (
         <>
             <div>
                 <h1>Dashboard</h1>
-                {renderMessages()}
+                {messages.map((obj: string, index) => {
+                    return <h1 key={index}>{obj}</h1>;
+                })}
             </div>
         </>
     );
