@@ -1,10 +1,8 @@
 "use client";
+import MensagemStatus, { Mensagem } from "@/components/MensagemStatus";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-type messageObject = {
-    Texto: string;
-};
 export default function Dashboard() {
     const api = axios.create({
         baseURL: "https://api-para-mqtt.vercel.app",
@@ -20,11 +18,12 @@ export default function Dashboard() {
 
     return (
         <>
-            <div>
-                <h1>Dashboard</h1>
-                {messages.map((obj: string, index) => {
-                    return <h1 key={index}>{obj}</h1>;
-                })}
+            <div className="flex items-center justify-center pt-8 ">
+                <div className="w-8/12 h-full bg-stone-800 rounded">
+                    {messages.map((msg: Mensagem) => {
+                        return <MensagemStatus mensagem={msg}></MensagemStatus>;
+                    })}
+                </div>
             </div>
         </>
     );
