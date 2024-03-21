@@ -10,7 +10,7 @@ export default function Dashboard() {
     const [messages, setMessages] = useState([]);
 
     useEffect(() => {
-        api.get("/messages").then((response: any) => {
+        api.get("/mensagens").then((response: any) => {
             console.log(response);
             setMessages(response.data);
         });

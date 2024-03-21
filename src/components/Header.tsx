@@ -3,11 +3,8 @@ import Logo from "./Logo";
 
 export default function Header() {
     return (
-        <div className="flex flex-row justify-between items-center w-full bg-stone-900">
-            <Logo variant={"white-text"} />
-            <div className="flex flex-row items-center w-9/12 text-zinc-200">
-                <Link href={"/dashboard"}>Dashboard</Link>
-            </div>
+        <div className="flex flex-row justify-center items-center w-full bg-green-900 min-h-28">
+            <h1 className="text-zinc-100 text-xl font-semibold" >Horta Palácio dos Sabores</h1>
         </div>
     );
 }
