@@ -11,8 +11,8 @@ export type propsEstufaMain = {
 export default function EstufaMain({ titulo }: propsEstufaMain) {
     return (
         <>
-            <div className="flex justify-evenly items-center flex-col min-w-80 min-h-52 bg-zinc-50 border-5">
-                <p>{titulo}</p>
+            <div className="rounded flex justify-evenly items-center flex-col min-w-80 min-h-52 bg-zinc-50 border-5">
+                <p className="font-bold">{titulo}</p>
                 <Link href={"/dashboard"}>
                     <Botao titulo={"Ver informações"} />
                 </Link>

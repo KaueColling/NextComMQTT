@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 export type cardEstufaProps = {
     topico: string;
     item: string;
+    titulo: string;
 };
 
 export type Status = {
@@ -17,7 +18,7 @@ export type Status = {
     luminosidade: string;
 };
 
-export default function ({ topico, item }: cardEstufaProps) {
+export default function ({ topico, item, titulo }: cardEstufaProps) {
     const [msgStatus, setMsgStatus] = useState("Conectando..");
 
     const api = axios.create({
@@ -29,18 +30,20 @@ export default function ({ topico, item }: cardEstufaProps) {
         luminosidade: 0,
     });
 
-    const atualizar = () => {
+    async function atualizar() {
+        let urlToRequest = "/" + topico + "/" + item;
         try {
-            let urlToRequest = "/" + topico + "/" + item;
-            api.get(urlToRequest).then((response: any) => {
-                console.log(response);
-                setStatus(response.data);
+            const response = await api.get(urlToRequest);
+
+            console.log(response);
+            setStatus(response.data);
+            if (response.data != undefined && !Array.isArray(response.data)) {
                 setMsgStatus("Conectado");
-            });
+            }
         } catch (err) {
-            throw err;
+            console.log(err);
         }
-    };
+    }
     useEffect(() => {
         atualizar();
     }, []);
@@ -51,10 +54,28 @@ export default function ({ topico, item }: cardEstufaProps) {
         }, 3000);
     }, [status]);
 
+    function carregarBarras() {
+        return (
+            <>
+                <div>
+                    <Luminosidade
+                        valor={status.luminosidade}
+                        msgStatus={msgStatus}
+                    />
+                    <Temperatura
+                        valor={status.temperatura}
+                        msgStatus={msgStatus}
+                    />
+                    <Umidade valor={status.umidade} msgStatus={msgStatus} />
+                </div>
+            </>
+        );
+    }
+
     return (
         <>
-            <div className="flex flex-col items-center bg-zinc-50 min-w-80 min-h-56">
-                <h1 className="mt-2 text-xl font-semibold">{item}</h1>
+            <div className="rounded flex flex-col items-center bg-zinc-50 min-w-80 min-h-56">
+                <h1 className="mt-2 text-xl font-semibold">{titulo}</h1>
                 <div className="min-h-0.5 bg-stone-900 w-full"></div>
                 <div className="w-10/12">
                     <div className="flex flex-row mt-3">
@@ -62,9 +83,7 @@ export default function ({ topico, item }: cardEstufaProps) {
                         <p className="text-zinc-600">{msgStatus}</p>
                     </div>
 
-                    <Luminosidade valor={status.luminosidade} />
-                    <Temperatura valor={status.temperatura} />
-                    <Umidade valor={status.umidade} />
+                    {carregarBarras()}
                 </div>
             </div>
         </>

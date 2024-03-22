@@ -5,9 +5,9 @@ export default function ({ valor }: propsStatus) {
 
     return (
         <>
-            <div className="mt-2 flex items-center text-lg w-68 min-h-9 h-9 bg-stone-400">
+            <div className="rounded mt-2 flex items-center text-lg w-68 min-h-9 h-9 bg-stone-400">
                 <div
-                    className="bg-yellow-500 min-h-full"
+                    className="rounded bg-yellow-500 min-h-full"
                     style={{
                         minWidth: valorPorcentagem + "%",
                         width: valorPorcentagem + "%",
