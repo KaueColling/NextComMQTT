@@ -12,38 +12,44 @@ export type cardEstufaProps = {
 };
 
 export type Status = {
-    Temperatura: string;
-    Umidade: string;
-    Luminosidade: string;
+    temperatura: string;
+    umidade: string;
+    luminosidade: string;
 };
 
 export default function ({ topico, item }: cardEstufaProps) {
-    const getStatus = (): string => {
-        return "Conectando..";
-    };
+    const [msgStatus, setMsgStatus] = useState("Conectando..");
 
     const api = axios.create({
         baseURL: "https://api-para-mqtt.vercel.app",
     });
     const [status, setStatus] = useState({
-        Temperatura: 0,
-        Umidade: 0,
-        Luminosidade: 0,
+        temperatura: 0,
+        umidade: 0,
+        luminosidade: 0,
     });
 
-    useEffect(() => {
+    const atualizar = () => {
         try {
-            console.log("URL: " + "/mensagens/" + topico + "/" + item);
-            api.get("/mensagens" + topico + "/" + item).then(
-                (response: any) => {
-                    console.log(response);
-                    setStatus(response.data);
-                }
-            );
+            let urlToRequest = "/" + topico + "/" + item;
+            api.get(urlToRequest).then((response: any) => {
+                console.log(response);
+                setStatus(response.data);
+                setMsgStatus("Conectado");
+            });
         } catch (err) {
             throw err;
         }
+    };
+    useEffect(() => {
+        atualizar();
     }, []);
+
+    useEffect(() => {
+        setTimeout(() => {
+            atualizar();
+        }, 3000);
+    }, [status]);
 
     return (
         <>
@@ -53,12 +59,12 @@ export default function ({ topico, item }: cardEstufaProps) {
                 <div className="w-10/12">
                     <div className="flex flex-row mt-3">
                         <p className="pr-2 font-semibold">Status: </p>
-                        <p className="text-zinc-600">{getStatus()}</p>
+                        <p className="text-zinc-600">{msgStatus}</p>
                     </div>
 
-                    <Luminosidade valor={status.Luminosidade} />
-                    <Temperatura valor={status.Temperatura} />
-                    <Umidade valor={status.Umidade} />
+                    <Luminosidade valor={status.luminosidade} />
+                    <Temperatura valor={status.temperatura} />
+                    <Umidade valor={status.umidade} />
                 </div>
             </div>
         </>

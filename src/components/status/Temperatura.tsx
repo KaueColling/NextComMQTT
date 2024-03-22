@@ -2,7 +2,7 @@ export type propsStatus = {
     valor: number;
 };
 export default function ({ valor }: propsStatus) {
-    const valorPorcentagem = (valor / 80) * 100;
+    const valorPorcentagem = ((valor + 40) / 120) * 100;
 
     return (
         <>

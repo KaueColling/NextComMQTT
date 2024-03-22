@@ -1,7 +1,7 @@
 import { propsStatus } from "./Temperatura";
 
 export default function ({ valor }: propsStatus) {
-    const valorPorcentagem = valor / 10;
+    const valorPorcentagem = (valor / 4063) * 100;
 
     return (
         <>
