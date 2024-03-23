@@ -1,6 +1,6 @@
 import { propsStatus } from "./Temperatura";
 
-export default function ({ valor }: propsStatus) {
+export default function Umidade({ valor }: propsStatus) {
     return (
         <>
             <div className="rounded mt-2 flex items-center text-lg w-68 min-h-9 h-9 bg-stone-400">

@@ -3,7 +3,7 @@ export type propsStatus = {
     valor: number;
     msgStatus: string;
 };
-export default function ({ valor, msgStatus }: propsStatus) {
+export default function Temperatura({ valor, msgStatus }: propsStatus) {
     const valorPorcentagem =
         msgStatus == "Conectando.." ? 0 : ((valor + 40) / 120) * 100;
 

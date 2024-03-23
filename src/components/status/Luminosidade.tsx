@@ -1,6 +1,6 @@
 import { propsStatus } from "./Temperatura";
 
-export default function ({ valor }: propsStatus) {
+export default function Luminosidade({ valor }: propsStatus) {
     const valorPorcentagem = (valor / 4063) * 100;
 
     return (

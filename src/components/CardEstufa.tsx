@@ -18,7 +18,7 @@ export type Status = {
     luminosidade: string;
 };
 
-export default function ({ topico, item, titulo }: cardEstufaProps) {
+export default function CardEstufa({ topico, item, titulo }: cardEstufaProps) {
     const [msgStatus, setMsgStatus] = useState("Conectando..");
 
     const api = axios.create({
