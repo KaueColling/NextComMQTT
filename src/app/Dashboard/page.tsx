@@ -4,7 +4,7 @@ import Botao from "@/components/Botao";
 import Link from "next/link";
 import { useMemo } from "react";
 
-export default function dashboard() {
+export default function Dashboard() {
     return (
         <>
             <div>

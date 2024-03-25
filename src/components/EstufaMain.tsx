@@ -13,7 +13,7 @@ export default function EstufaMain({ titulo }: propsEstufaMain) {
         <>
             <div className="rounded flex justify-evenly items-center flex-col min-w-80 min-h-52 bg-zinc-50 border-5">
                 <p className="font-bold">{titulo}</p>
-                <Link href={"/dashboard"}>
+                <Link href={"/Dashboard"}>
                     <Botao titulo={"Ver informações"} />
                 </Link>
             </div>
