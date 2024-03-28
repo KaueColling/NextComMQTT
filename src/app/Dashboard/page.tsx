@@ -14,7 +14,7 @@ export default function Dashboard() {
                     </Link>
                 </div>
 
-                <div className="flex flex-row items-center justify-center pt-8 gap-8">
+                <div className="flex flex-col items-center justify-center pt-8 gap-8 xl:flex-row">
                     <CardEstufa
                         titulo={"Pimentão"}
                         topico="legumes"
