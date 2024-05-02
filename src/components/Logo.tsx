@@ -52,7 +52,7 @@ function getVariant(variant: string) {
                     height={90}
                     alt="logo"
                 />
-                <p className="text-zinc-200">IO Plants</p>
+                <p className="text-zinc-600">IO Plants</p>
             </div>;
         }
     }
